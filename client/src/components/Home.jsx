@@ -1,14 +1,7 @@
-// import { useState } from "react";
 import "./Home.css";
 import image from "../assets/image.svg";
 
 const Home = () => {
-  // const [image, setImage] = useState("");
-
-  // const handleChange = (e) => {
-  //   setImage(e.target.files);
-  // };
-
   return (
     <div className="home">
       <div className="home__title">Upload your image</div>
