@@ -1,5 +1,10 @@
 import express from "express";
 import fileUpload from "express-fileupload";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(fileUpload());
@@ -10,14 +15,18 @@ app.post("/upload", (req, res) => {
   }
 
   const file = req.files.file;
+  const rootdir = __dirname.replace("server", "");
 
-  file.mv(`${__dirname}/client/public/uploads/${file.name}`, (err) => {
+  file.mv(`${rootdir}/client/src/uploads/${file.name}`, (err) => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);
     }
 
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    res.json({
+      fileName: file.name,
+      filePath: `../uploads/${file.name}`,
+    });
   });
 });
 
